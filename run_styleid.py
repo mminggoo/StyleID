@@ -4,7 +4,6 @@ import numpy as np
 from omegaconf import OmegaConf
 from PIL import Image
 from einops import rearrange
-from pytorch_lightning import seed_everything
 from torch import autocast
 from contextlib import nullcontext
 import copy
@@ -115,7 +114,6 @@ def main():
 
     feat_path_root = opt.precomputed
 
-    seed_everything(22)
     output_path = opt.output_path
     os.makedirs(output_path, exist_ok=True)
     if len(feat_path_root) > 0:
