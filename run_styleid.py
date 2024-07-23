@@ -223,7 +223,7 @@ def main():
                                                     img_callback=ddim_sampler_callback)
                 cnt_feat = copy.deepcopy(feat_maps)
                 cnt_z_enc = feat_maps[0]['z_enc']
-
+            print(cnt_z_enc.shape, sty_z_enc.shape)
             with torch.no_grad():
                 with precision_scope("cuda"):
                     with model.ema_scope():
@@ -235,6 +235,7 @@ def main():
                             adain_z_enc = cnt_z_enc
                         else:
                             adain_z_enc = adain(cnt_z_enc, sty_z_enc)
+                        print(adain_z_enc, cnt_z_enc.shape, sty_z_enc.shape)
                         feat_maps = feat_merge(opt, cnt_feat, sty_feat, start_step=start_step)
                         if opt.without_attn_injection:
                             feat_maps = None
